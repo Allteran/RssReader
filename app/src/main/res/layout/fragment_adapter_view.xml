@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_view_rsslistitem_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/list_title_padding"
+        android:textSize="@dimen/list_title_text_size"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/text_view_rsslistitem_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/list_description_text_size"
+        android:layout_marginLeft="@dimen/list_description_margin"
+        android:layout_marginRight="@dimen/list_description_margin"
+        android:layout_marginBottom="@dimen/list_description_margin"/>
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Titles-->
+    <string name="app_name">GH Prozapas (RssReader)</string>
+    <string name="notification_update_title" translatable="false">Naked-science</string>
+    <string name="gplus_activity_label">Sign In Google+</string>
+    <string name="title_facebook_login">Connecting to your Facebook</string>
+    <string name="its_you">We believe that it is you</string>
+    <string name="favorites_activity_name">Favorite Articles</string>
+    <array name="drop_down_main_menu">
+        <item>News</item>
+        <item>Saved Articles</item>
+    </array>
+
+
+    <!--Button's labels-->
+    <string name="action_about">Author</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_share">Share</string>
+    <string name="action_gplus_singing">Sing In With Google+</string>
+    <string name="action_show_favorites">Favorite articles</string>
+    <string name="action_add_to_favorites">Add to favorites</string>
+    <string name="action_delete_article">Delete saved article</string>
+
+    <!--Else-->
+    <string name="avatar_description">The image of user</string>
+    <string name="facebook_app_id" translatable="false">336901469830196</string>
+
+    <!--Messages-->
+    <string name="no_data_article">We are ready to read, chose an article :)</string>
+    <string name="about_message">Vitaliy Prozapas is an author of this useless application :)</string>
+    <string name="before_link_message">Read full version </string>
+    <string name="before_date_message">Published date </string>
+    <string name="no_connection_message">There is no internet connection :(</string>
+    <string name="notification_message">Service has been started</string>
+    <string name="got_new_update_message">We got a new interesting articles!</string>
+    <string name="added_to_fav_message">This article have been added to favorites</string>
+    <string name="delete_article_message">The article have been deleted</string>
+    <string name="shared_success_message">You have successfully shared this article</string>
+    <string name="shared_error_message">Oops! Something went wrong…</string>
+    <string name="gplus_successfully_signed_message">Look at it! You have successfully signed in Google+!</string>
+    <string name="posted_article_message">Posted article, name:</string>
+    <string name="publish_cancelled_message">Publish cancelled</string>
+    <string name="error_publishing_message">Error publishing</string>
+    <string name="gplus_share">Share on Google+</string>
+    <string name="clear_all_favorites">Delete all articles</string>
+    <string name="clear_all_favorites_message">Are you sure you want to clear favorites?</string>
+    <string name="no_saved_articles_message">There are not any saved article</string>
+
+</resources>

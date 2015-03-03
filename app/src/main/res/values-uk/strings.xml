@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Titles-->
+    <string name="app_name">GH Prozapas (RssReader)</string>
+    <string name="action_about">Про автора</string>
+    <string name="favorites_activity_name">Улюблені статті</string>
+    <string name="title_facebook_login">Підключаємось до Facebook</string>
+    <string name="its_you">Ми вважаємо, що це Ви</string>
+    <string name="gplus_activity_label">Заходимо на ваш акаунт Google+</string>
+
+    <!--Button's labels-->
+    <string name="action_refresh">Оновити список статей</string>
+    <string name="action_add_to_favorites">Додати статтю до улюблених</string>
+    <string name="action_delete_article">Видалити збережену статтю</string>
+    <string name="action_show_favorites">Улюблені статті</string>
+    <string name="action_share">Поділитись</string>
+    <string name="action_gplus_singing">Зайти на свій Google+ акаунт</string>
+
+    <!--Else-->
+    <string name="avatar_description">Зображення аватару користвача</string>
+
+    <!--Messages-->
+    <string name="no_data_article">Виберіть статтю</string>
+    <string name="about_message">Автор цїєї непрактичної програми - студент Geekhub Прозапас Віталій</string>
+    <string name="before_link_message">Читати детальніше </string>
+    <string name="before_date_message">Опубліковано </string>
+    <string name="no_connection_message">Підключення до Інтернет недоступно :(</string>
+    <string name="notification_message">Сервіс почав свою роботу</string>
+    <string name="got_new_update_message">Нові статті вже доступні!</string>
+    <string name="added_to_fav_message">Ви успішно додали статтю до улюблених</string>
+    <string name="delete_article_message">Ви успішно видалили збережену статтю</string>
+    <string name="shared_success_message">Ви успішно поділитись цією статею</string>
+    <string name="shared_error_message">О-ой! Щось пішло не так…</string>
+    <string name="gplus_successfully_signed_message">Ура! Ви успішно зашли на свій акаунт Google+</string>
+    <string name="error_publishing_message">Помилка при публікації статті</string>
+    <string name="posted_article_message">Ви успішно поділлись статтею </string>
+    <string name="publish_cancelled_message">Публікацію відмінено</string>
+
+</resources>

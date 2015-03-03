@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/loading_indicator"
+        android:visibility="visible">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <!--when content is avalble-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/content_container"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/details_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/details_title_padding"
+                android:textSize="@dimen/details_text_title_size"
+                android:textStyle="bold"
+                android:gravity="center"/>
+            <ImageView
+                android:id="@+id/details_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image_view_height"
+                android:layout_below="@+id/details_title"/>
+            <TextView
+                android:id="@+id/details_description"
+                android:layout_width="wrap_content"
+                android:padding="@dimen/details_description_padding"
+                android:textSize="@dimen/details_description_text_size"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/details_image"/>
+            <TextView
+                android:id="@+id/details_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/details_description"
+                android:autoLink="web"
+                android:textSize="@dimen/details_link_text_size"
+                android:padding="@dimen/details_link_padding"/>
+            <TextView
+                android:id="@+id/details_published_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:padding="@dimen/details_date_padding"
+                android:textSize="@dimen/details_date_text_size"
+                android:layout_below="@+id/details_link"/>
+            <Button
+                android:id="@+id/gplus_share_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/details_published_date"
+                android:text="@string/gplus_share"
+                android:layout_margin="@dimen/gplus_share_button_margin"/>
+        </RelativeLayout>
+
+    </ScrollView>
+    <RelativeLayout
+        android:id="@+id/no_data_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/no_data_text_view"
+            android:textSize="@dimen/details_readiness_text_size"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+</LinearLayout>

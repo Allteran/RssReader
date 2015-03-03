@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Titles-->
+    <string name="app_name">GH Prozapas (RssReader)</string>
+    <string name="action_about">Об авторе</string>
+    <string name="favorites_activity_name">Любимые статьи</string>
+    <string name="gplus_activity_label">Заходим на Ваш аккаунт Google+…</string>
+    <string name="its_you">Мы считаем, что это Вы</string>
+    <string name="title_facebook_login">Подключаемся к Facebook</string>
+
+    <!--Button's labels-->
+    <string name="action_refresh">Обновить</string>
+    <string name="action_show_favorites">Любимые статьи</string>
+    <string name="action_delete_article">Удалить сохраненную статью</string>
+    <string name="action_share">Поделиться</string>
+    <string name="action_gplus_singing">Зайти на свой Google+ аккаунт</string>
+    <string name="action_add_to_favorites">Сохранить статью</string>
+
+    <!--Else-->
+    <string name="avatar_description">Изображение аватара пользователя</string>
+
+    <!--Messages-->
+    <string name="no_data_article">Выберите статью и поехали :)</string>
+    <string name="about_message">Автор этого бесполезного приложения - студент Geekhub Прозапас Виталий</string>
+    <string name="before_link_message">Читать детальнее </string>
+    <string name="before_date_message">Опубликовано </string>
+    <string name="no_connection_message">Отсутствует подключение к Интернет :(</string>
+    <string name="notification_message">Сервис начал свою работу</string>
+    <string name="got_new_update_message">У нас есть новые интересные статьи!</string>
+    <string name="added_to_fav_message">Вы успешно добавили статью в любимые</string>
+    <string name="delete_article_message">Вы успешно удалили сохраненную статью</string>
+    <string name="gplus_successfully_signed_message">Ура! Вы успешно вошли в свой аккаунт Google+!</string>
+    <string name="shared_error_message">О-ой! Что-то пошло не так…</string>
+    <string name="shared_success_message">Вы успешно поделились этой статьей</string>
+    <string name="error_publishing_message">Ошибка при публикации статьи</string>
+    <string name="posted_article_message">Вы успешно поделились статьей </string>
+    <string name="publish_cancelled_message">Публикация отменена</string>
+
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="nd_background">#f6a2a7b2</color>
+    <color name="separator_line">#f6232323</color>
+    <color name="drop_down_color">#f6fcffe4</color>
+</resources>
