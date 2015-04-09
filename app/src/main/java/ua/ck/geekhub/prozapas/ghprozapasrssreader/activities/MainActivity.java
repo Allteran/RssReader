@@ -4,16 +4,15 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.view.KeyEvent;
 
 import com.facebook.AppEventsLogger;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.R;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.fragments.DetailsFragment;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.fragments.ListItemFragment;
-import ua.ck.geekhub.prozapas.ghprozapasrssreader.helpers.RssDatabaseHelper;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.models.RssItem;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.services.RssPullService;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const;
@@ -24,7 +23,6 @@ public class MainActivity extends BaseActivity implements ListItemFragment.OnLis
     private DetailsFragment mDetailsFragment;
     private ListItemFragment mListItemFragment;
     private Intent mPullServiceIntent;
-    private RssDatabaseHelper mDatabaseHelper;
     private int mPosition;
 
     @Override
@@ -34,7 +32,6 @@ public class MainActivity extends BaseActivity implements ListItemFragment.OnLis
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.ic_launcher);
-        mDatabaseHelper = new RssDatabaseHelper(this);
 
         mPullServiceIntent = new Intent(this, RssPullService.class);
         startService(mPullServiceIntent);

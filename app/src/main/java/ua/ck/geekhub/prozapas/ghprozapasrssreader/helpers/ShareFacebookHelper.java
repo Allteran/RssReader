@@ -32,7 +32,7 @@ public class ShareFacebookHelper {
         params.putString("name", mCurrentFeed.getTitle());
         params.putString("description", mCurrentFeed.getContent());
         params.putString("link", mCurrentFeed.getLink());
-        params.putString("picture", mCurrentFeed.getImageUrl());
+        params.putString("picture", mCurrentFeed.getImageURL());
 
         WebDialog feedDialog = (
                 new WebDialog.FeedDialogBuilder(mContext,

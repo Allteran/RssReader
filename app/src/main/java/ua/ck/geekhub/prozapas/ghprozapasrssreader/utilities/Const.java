@@ -17,7 +17,5 @@ public final class Const {
     public static final int NOTIFICATION_ID = 1;
     public static final int DATABASE_VERSION = 1;
     public static final long SLEEP_UPDATE_TIME = 300;
-    public static final int ACTION_ADD_TO_FAV_ID = 1;
-    public static final int ACTION_DELETE_ARTICLE_ID = 4;
-    public static final int ACTION_SHARE = 5;
+    public static final String REALM_SAVE_STATE = "realm";
 }

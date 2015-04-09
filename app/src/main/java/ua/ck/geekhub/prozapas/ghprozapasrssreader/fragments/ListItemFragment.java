@@ -31,9 +31,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.exceptions.RealmMigrationNeededException;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.R;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.activities.GPlusActivity;
-import ua.ck.geekhub.prozapas.ghprozapasrssreader.helpers.RssDatabaseHelper;
+import ua.ck.geekhub.prozapas.ghprozapasrssreader.databases.RealmHelper;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.models.RssItem;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.tasks.DownloadString;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.tasks.ParseFromJSON;
@@ -41,6 +43,8 @@ import ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const;
 import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
+
+import static ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const.SHARED_PREFERECES_KEY;
 
 /**
  * Created by Allteran on 16.11.2014.
@@ -53,10 +57,11 @@ public class ListItemFragment extends BaseFragment {
     private SharedPreferences mSharedPreferences;
     private String mDownloadedString;
     private PullToRefreshLayout mSwipeLayout;
-    private RssDatabaseHelper mDatabaseHelper;
     private RssAdapter mArticlesAdapter;
     private ActionBar mActions;
     private int mSpinnerPosition;
+    private Realm mRealm;
+    private RealmHelper mRealmHelper;
 
     public interface OnListFragmentEvent {
         public void onListFragmentItemClick(int position, ArrayList<RssItem> rssItemList);
@@ -77,15 +82,22 @@ public class ListItemFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        try {
+            mRealm = Realm.getInstance(getActivity());
+        } catch (RealmMigrationNeededException e) {
+            e.printStackTrace();
+            Realm.deleteRealmFile(getActivity());
+        }
+        mRealmHelper = new RealmHelper();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mDownloadedString = mSharedPreferences.getString(Const.SHARED_PREFERECES_KEY, null);
-        mDatabaseHelper = new RssDatabaseHelper(getActivity());
+        if (mSharedPreferences.getString(SHARED_PREFERECES_KEY, null) != null) {
+            mDownloadedString = mSharedPreferences.getString(SHARED_PREFERECES_KEY, null);
+        }
         mArticlesAdapter = new RssAdapter(getActivity());
         mListView = (ListView) view.findViewById(R.id.list_item);
         mListView.setAdapter(mArticlesAdapter);
@@ -113,11 +125,15 @@ public class ListItemFragment extends BaseFragment {
                 ((ActionBarActivity) getActivity()).supportInvalidateOptionsMenu();
                 switch (i) {
                     case 0:
-                        updateListItems();
-                        mArticlesAdapter.notifyDataSetChanged();
+                        if (mDownloadedString == null) {
+                            startDownload();
+                        } else {
+                            updateListItems();
+                        }
                         return true;
                     case 1:
-                        mRssItemList = mDatabaseHelper.getAllArticles();
+//                        mRssItemList = mDatabaseHelper.getAllArticles();
+                        mRssItemList = mRealmHelper.getAllArticles(mRealm);
                         if (!mRssItemList.isEmpty()) {
                             mArticlesAdapter.notifyDataSetChanged();
                             showContent(getView());
@@ -129,6 +145,7 @@ public class ListItemFragment extends BaseFragment {
                 return true;
             }
         };
+        mArticlesAdapter.notifyDataSetChanged();
         assert mActions != null;
 
         mActions.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_LIST);
@@ -168,20 +185,21 @@ public class ListItemFragment extends BaseFragment {
             mRssItemList = parsedData.getRssList();
             saveStringInPreferences();
         } catch (JSONException e) {
-            mDownloadedString = mSharedPreferences.getString(Const.SHARED_PREFERECES_KEY, null);
+            mDownloadedString = mSharedPreferences.getString(SHARED_PREFERECES_KEY, null);
             e.printStackTrace();
         }
+        mArticlesAdapter.notifyDataSetChanged();
         showContent(getView());
     }
 
     public void saveStringInPreferences() {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString(Const.SHARED_PREFERECES_KEY, mDownloadedString);
+        editor.putString(SHARED_PREFERECES_KEY, mDownloadedString);
         editor.apply();
 
     }
 
-    //calls DownloadRssTask
+    //call DownloadRssTask
     public void startDownload() {
         if (isOnline()) {
             new DownloadRssTask().execute(Const.URL);
@@ -230,9 +248,9 @@ public class ListItemFragment extends BaseFragment {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mDatabaseHelper.deleteAllArticles();
-                                mRssItemList.clear();
+                                mRealmHelper.deleteAllArticles(mRealm, mRssItemList);
                                 mArticlesAdapter.notifyDataSetChanged();
+                                mRealm = Realm.getInstance(getActivity());
                                 showNoData(getView(), getString(R.string.no_saved_articles_message));
                                 ((ActionBarActivity) getActivity()).supportInvalidateOptionsMenu();
                             }
@@ -312,7 +330,7 @@ public class ListItemFragment extends BaseFragment {
 
             if (rssItem != null) {
                 mViewHolder.mTitle.setText(rssItem.getTitle());
-                mViewHolder.mDescription.setText(rssItem.getContentSnippet());
+                mViewHolder.mDescription.setText(rssItem.getContentSnippet().replace("\n", ""));
             }
             return convertView;
         }

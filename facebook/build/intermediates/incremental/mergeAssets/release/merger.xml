@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\Data\Programming\Android\AndroidWorkspace\GHProzapas(RssReader)\facebook\src\main\assets"/></dataSet><dataSet config="release"><source path="E:\Data\Programming\Android\AndroidWorkspace\GHProzapas(RssReader)\facebook\src\release\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="E:\Data\Programming\Android\AndroidWorkspace\RssReader\facebook\src\main\assets"/></dataSet><dataSet config="release"><source path="E:\Data\Programming\Android\AndroidWorkspace\RssReader\facebook\src\release\assets"/></dataSet></merger>

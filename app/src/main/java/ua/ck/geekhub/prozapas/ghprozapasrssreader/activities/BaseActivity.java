@@ -32,6 +32,10 @@ public abstract class BaseActivity extends ActionBarActivity {
         mUiHelper.onCreate(savedInstanceState);
     }
 
+    public UiLifecycleHelper getUiHelper() {
+        return mUiHelper;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

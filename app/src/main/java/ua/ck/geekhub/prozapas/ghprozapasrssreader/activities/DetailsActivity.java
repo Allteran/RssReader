@@ -14,9 +14,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.R;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.fragments.DetailsFragment;
-import ua.ck.geekhub.prozapas.ghprozapasrssreader.helpers.RssDatabaseHelper;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.models.RssItem;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const;
 
@@ -26,11 +26,11 @@ import ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const;
  */
 public class DetailsActivity extends BaseActivity {
 
-    private RssDatabaseHelper mDatabaseHelper;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ArrayList<RssItem> mRssItemList;
     private int mPosition;
+    private Realm mRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +38,7 @@ public class DetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_details);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        mDatabaseHelper = new RssDatabaseHelper(this);
+        mRealm = Realm.getInstance(this);
         if (savedInstanceState != null) {
             mPosition = savedInstanceState.getInt(Const.KEY_POSITION);
             mRssItemList = (ArrayList<RssItem>) savedInstanceState.getSerializable(Const.KEY_RSSLIST);
@@ -67,6 +66,11 @@ public class DetailsActivity extends BaseActivity {
         showDetails(mRssItemList.get(mPosition));
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mRealm.close();
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

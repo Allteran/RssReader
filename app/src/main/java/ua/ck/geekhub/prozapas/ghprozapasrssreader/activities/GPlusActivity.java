@@ -129,7 +129,7 @@ public class GPlusActivity extends BaseActivity implements
                 mLoginName.setText(userName);
                 mAvatarImage.setVisibility(View.VISIBLE);
                 mAvatarImage.setImageBitmap(userImage);
-                getActionBar().setTitle(R.string.its_you);
+                getSupportActionBar().setTitle(R.string.its_you);
                 Toast.makeText(getApplicationContext(), R.string.gplus_successfully_signed_message, Toast.LENGTH_SHORT).show();
             }
         }.execute();
