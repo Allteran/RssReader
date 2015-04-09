@@ -59,7 +59,8 @@ public class RealmHelper {
     public void deleteAllArticles(Realm realm, List<RssItem> rssItems) {
         List<RealmRssItem> result = realm.where(RealmRssItem.class).findAll();
         realm.beginTransaction();
-        for (int i = 0; i < result.size(); i++) {
+        int size = result.size();
+        for (int i = 0; i < size; i++) {
             result.remove(i);
         }
         realm.commitTransaction();

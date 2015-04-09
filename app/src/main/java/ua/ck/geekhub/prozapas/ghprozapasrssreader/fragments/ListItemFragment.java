@@ -94,7 +94,7 @@ public class ListItemFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       
+
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (mSharedPreferences.getString(SHARED_PREFERECES_KEY, null) != null) {
             mDownloadedString = mSharedPreferences.getString(SHARED_PREFERECES_KEY, null);
