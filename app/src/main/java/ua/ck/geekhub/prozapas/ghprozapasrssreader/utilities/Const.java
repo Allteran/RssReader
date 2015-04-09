@@ -18,4 +18,5 @@ public final class Const {
     public static final int DATABASE_VERSION = 1;
     public static final long SLEEP_UPDATE_TIME = 300;
     public static final String REALM_SAVE_STATE = "realm";
+    public static final String ARTICLES_STATE = "articles";
 }
