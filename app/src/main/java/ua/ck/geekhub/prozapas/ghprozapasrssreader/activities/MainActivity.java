@@ -43,9 +43,6 @@ public class MainActivity extends BaseActivity implements ListItemFragment.OnLis
         if (savedInstanceState == null) {
             fragmentTransaction.replace(R.id.list_fragment, mListItemFragment);
         }
-//        else {
-//            fragmentTransaction.replace(R.id.list_fragment, mListItemFragment);
-//        }
         if (isContentHere) {
             mDetailsFragment = new DetailsFragment();
             fragmentTransaction.add(R.id.details_fragment_content, mDetailsFragment);
@@ -92,50 +89,4 @@ public class MainActivity extends BaseActivity implements ListItemFragment.OnLis
         }
         mPosition = position;
     }
-
-
-    //        if (getString(R.string.screen_type).equals("sw600dp")) {
-//            menu.add(0, Const.ACTION_ADD_TO_FAV_ID, 2, R.string.action_add_to_favorites)
-//                    .setIcon(R.drawable.ic_action_important).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-//            menu.add(0, Const.ACTION_SHARE, 2, R.string.action_share)
-//                    .setIcon(R.drawable.ic_action_share)
-//                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-//        }
-//        super.onCreateOptionsMenu(menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case Const.ACTION_REFRESH_ID:
-//                mListItemFragment.startDownload();
-//                break;
-//            case Const.ACTION_SHOW_FAV_ID:
-//                Intent favoritesIntent = new Intent(MainActivity.this, FavoritesActivity.class);
-//                startActivity(favoritesIntent);
-//                break;
-//            case Const.ACTION_ADD_TO_FAV_ID:
-//                mDatabaseHelper.addArticle(mRssItemList.get(mPosition));
-//                Toast.makeText(this, getString(R.string.added_to_fav_message), Toast.LENGTH_SHORT).show();
-//                break;
-//            //Share only via Facebook for now
-//            case Const.ACTION_SHARE:
-//                if (FacebookDialog.canPresentShareDialog(getApplicationContext(), FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
-//                    FacebookDialog fbShareDialog = new FacebookDialog.ShareDialogBuilder(this)
-//                            .setName(mRssItemList.get(mPosition).getTitle())
-//                            .setLink(mRssItemList.get(mPosition).getLink())
-//                            .setDescription((Html.fromHtml(mRssItemList.get(mPosition).getContent())).toString())
-//                            .build();
-//                    super.mUiHelper.trackPendingDialogCall(fbShareDialog.present());
-//                } else {
-//                    new ShareFacebookHelper(this, mRssItemList.get(mPosition)).login(this);
-//                }
-//                break;
-//            case Const.ACTION_GPLUS_SINGIN:
-//                startActivity(new Intent(this, GPlusActivity.class));
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

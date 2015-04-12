@@ -45,14 +45,21 @@ public class DetailsFragment extends BaseFragment {
     private SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
     private RealmHelper mRealmHelper;
     private Realm mRealm;
+    private ActionBarActivity mActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-//        Realm.deleteRealmFile(getActivity());
-        mRealm = Realm.getInstance(getActivity());
+        mActivity = (ActionBarActivity) getActivity();
+        mRealm = Realm.getInstance(mActivity);
         mRealmHelper = new RealmHelper();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mRealm.close();
     }
 
     @Override
@@ -72,12 +79,16 @@ public class DetailsFragment extends BaseFragment {
             mRssItem = (RssItem) getArguments().getSerializable(Const.ARG_ENTRY);
 
             ImageView image = (ImageView) view.findViewById(R.id.details_image);
-            mRssItem.setImageURL(mRssItem.getContent().substring(mRssItem.getContent().lastIndexOf("http"), mRssItem.getContent().indexOf("jpg") + 3));
+            try {
+                mRssItem.setImageURL(mRssItem.getContent().substring(mRssItem.getContent().lastIndexOf("http"), mRssItem.getContent().indexOf("jpg") + 3));
+            } catch (IndexOutOfBoundsException ex) {
+                mRssItem.setImageURL("Image is not available");
+            }
             try {
                 Picasso.with(getActivity()).load(mRssItem.getImageURL()).into(image);
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.i(TAG, "Unable to load image");
+//                image.setImageDrawable();
             }
             String contentWithoudImage = mRssItem.getContent().replace(mRssItem.getContent().substring(mRssItem.getContent()
                     .lastIndexOf("<img"), mRssItem.getContent().indexOf("br") + 4), "");
@@ -98,7 +109,6 @@ public class DetailsFragment extends BaseFragment {
             }
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM HH:mm");
             String publishDate = dateFormat.format(incDate);
-            Log.i(TAG, "Done with setting date");
 
             TextView textViewPublishedDate = (TextView) view.findViewById(R.id.details_published_date);
             textViewPublishedDate.setText(getResources().getString(R.string.before_date_message) + " " + publishDate);
@@ -140,14 +150,12 @@ public class DetailsFragment extends BaseFragment {
             case R.id.action_add_to_favorite:
                 if (mRealmHelper.isArticleInDatabase(mRealm, mRssItem)) {
                     mRealmHelper.deleteArticle(mRealm, mRssItem);
-//                    mDatabaseHelper.deleteArticle(mRssItem);
-                    Toast.makeText(getActivity(), R.string.delete_article_message, Toast.LENGTH_SHORT).show();
-                    ((ActionBarActivity) getActivity()).supportInvalidateOptionsMenu();
+                    Toast.makeText(mActivity, R.string.delete_article_message, Toast.LENGTH_SHORT).show();
+                    mActivity.supportInvalidateOptionsMenu();
                 } else {
-//                    mDatabaseHelper.addArticle(mRssItem);
                     mRealmHelper.addArticle(mRssItem, mRealm);
-                    ((ActionBarActivity) getActivity()).supportInvalidateOptionsMenu();
-                    Toast.makeText(getActivity(), R.string.added_to_fav_message, Toast.LENGTH_SHORT).show();
+                    mActivity.supportInvalidateOptionsMenu();
+                    Toast.makeText(mActivity, R.string.added_to_fav_message, Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.action_share:
@@ -160,7 +168,7 @@ public class DetailsFragment extends BaseFragment {
                     MainActivity activity = (MainActivity) getActivity();
                     activity.getUiHelper().trackPendingDialogCall(fbShareDialog.present());
                 } else {
-                    new ShareFacebookHelper(getActivity(), mRssItem).login(getActivity());
+                    new ShareFacebookHelper(mActivity, mRssItem).login(mActivity);
                 }
                 break;
         }

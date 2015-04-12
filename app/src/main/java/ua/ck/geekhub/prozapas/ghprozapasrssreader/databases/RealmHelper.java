@@ -1,5 +1,6 @@
 package ua.ck.geekhub.prozapas.ghprozapasrssreader.databases;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -56,14 +57,9 @@ public class RealmHelper {
         return result.size() != 0;
     }
 
-    public void deleteAllArticles(Realm realm, List<RssItem> rssItems) {
-        List<RealmRssItem> result = realm.where(RealmRssItem.class).findAll();
-        realm.beginTransaction();
-        int size = result.size();
-        for (int i = 0; i < size; i++) {
-            result.remove(i);
-        }
-        realm.commitTransaction();
-        rssItems.clear();
+    public void deleteAllArticles(Realm realm, Context activity, List<RssItem> articles) {
+        realm.close();
+        Realm.deleteRealmFile(activity);
+        articles.clear();
     }
 }

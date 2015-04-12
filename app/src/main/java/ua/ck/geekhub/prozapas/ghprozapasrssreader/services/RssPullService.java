@@ -25,6 +25,7 @@ import ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const;
  * Created by Allteran on 11.12.2014.
  */
 public class RssPullService extends Service {
+    private static final String TAG = RssPullService.class.getName();
     public NotificationManager mNotificationManager;
     private String mDownloadedString;
     private String mLastArticle;
@@ -32,6 +33,8 @@ public class RssPullService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.i(TAG, "Servis has been started");
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         mLastArticle = sharedPreferences.getString(Const.SHARED_PREFERECES_KEY, null);
 
@@ -45,7 +48,8 @@ public class RssPullService extends Service {
                 .setContentText(getString(R.string.notification_message));
 
         Intent serviceIntent = new Intent(getApplicationContext(), MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, serviceIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, serviceIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
         notificationBuilder.setContentIntent(pendingIntent);
 
         Notification notification = notificationBuilder.build();
@@ -86,7 +90,7 @@ public class RssPullService extends Service {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            Log.i(TAG, "Last article = Downloaded string?" + String.valueOf(mDownloadedString.equals(mLastArticle)));
             if (mLastArticle != null) {
                 if (!mLastArticle.equals(mDownloadedString)) {
 

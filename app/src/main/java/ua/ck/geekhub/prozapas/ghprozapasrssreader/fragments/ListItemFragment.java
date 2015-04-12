@@ -62,6 +62,7 @@ public class ListItemFragment extends BaseFragment {
     private int mSpinnerPosition;
     private Realm mRealm;
     private RealmHelper mRealmHelper;
+    private ActionBarActivity mActivity;
 
     public interface OnListFragmentEvent {
         public void onListFragmentItemClick(int position, ArrayList<RssItem> rssItemList);
@@ -82,13 +83,22 @@ public class ListItemFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        mActivity = (ActionBarActivity) getActivity();
         try {
             mRealm = Realm.getInstance(getActivity());
         } catch (RealmMigrationNeededException e) {
             e.printStackTrace();
-            Realm.deleteRealmFile(getActivity());
+            Realm.deleteRealmFile(mActivity);
         }
         mRealmHelper = new RealmHelper();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mRealm != null) {
+            mRealm.close();
+        }
     }
 
     @Override
@@ -133,7 +143,6 @@ public class ListItemFragment extends BaseFragment {
                         }
                         return true;
                     case 1:
-//                        mRssItemList = mDatabaseHelper.getAllArticles();
                         mRssItemList = mRealmHelper.getAllArticles(mRealm);
                         if (!mRssItemList.isEmpty()) {
                             mArticlesAdapter.notifyDataSetChanged();
@@ -184,7 +193,6 @@ public class ListItemFragment extends BaseFragment {
             dataToParse = new JSONObject(mDownloadedString);
             ParseFromJSON parsedData = new ParseFromJSON(dataToParse);
             mRssItemList = parsedData.getRssList();
-            saveStringInPreferences();
         } catch (JSONException e) {
             mDownloadedString = mSharedPreferences.getString(SHARED_PREFERECES_KEY, null);
             e.printStackTrace();
@@ -249,11 +257,11 @@ public class ListItemFragment extends BaseFragment {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mRealmHelper.deleteAllArticles(mRealm, mRssItemList);
+                                mRealmHelper.deleteAllArticles(mRealm, mActivity, mRssItemList);
                                 mArticlesAdapter.notifyDataSetChanged();
-                                mRealm = Realm.getInstance(getActivity());
+                                mRealm = Realm.getInstance(mActivity);
                                 showNoData(getView(), getString(R.string.no_saved_articles_message));
-                                ((ActionBarActivity) getActivity()).supportInvalidateOptionsMenu();
+                                mActivity.supportInvalidateOptionsMenu();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -284,6 +292,7 @@ public class ListItemFragment extends BaseFragment {
             super.onPostExecute(aVoid);
             updateListItems();
             mSwipeLayout.setRefreshComplete();
+            saveStringInPreferences();
         }
     }
 
