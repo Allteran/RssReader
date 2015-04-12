@@ -39,7 +39,6 @@ import ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const;
  * Created by Allteran on 16.11.2014.
  */
 public class DetailsFragment extends BaseFragment {
-    private final String TAG = getClass().getSimpleName();
 
     private RssItem mRssItem;
     private SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
@@ -82,13 +81,13 @@ public class DetailsFragment extends BaseFragment {
             try {
                 mRssItem.setImageURL(mRssItem.getContent().substring(mRssItem.getContent().lastIndexOf("http"), mRssItem.getContent().indexOf("jpg") + 3));
             } catch (IndexOutOfBoundsException ex) {
-                mRssItem.setImageURL("Image is not available");
+                ex.printStackTrace();
             }
             try {
                 Picasso.with(getActivity()).load(mRssItem.getImageURL()).into(image);
             } catch (Exception e) {
                 e.printStackTrace();
-//                image.setImageDrawable();
+                image.setImageResource(R.mipmap.no_photo);
             }
             String contentWithoudImage = mRssItem.getContent().replace(mRssItem.getContent().substring(mRssItem.getContent()
                     .lastIndexOf("<img"), mRssItem.getContent().indexOf("br") + 4), "");

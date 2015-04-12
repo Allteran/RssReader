@@ -52,8 +52,13 @@ public class RealmHelper {
     }
 
     public boolean isArticleInDatabase(Realm realm, RssItem incArticle) {
-        List<RealmRssItem> result = realm.where(RealmRssItem.class).equalTo("link", incArticle.getLink())
-                .findAll();
+        String link;
+        if (incArticle == null) {
+            link = "nullpointer";
+        } else {
+            link = incArticle.getLink();
+        }
+        List<RealmRssItem> result = realm.where(RealmRssItem.class).equalTo("link", link).findAll();
         return result.size() != 0;
     }
 
