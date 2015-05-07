@@ -1,12 +1,10 @@
 package ua.ck.geekhub.prozapas.ghprozapasrssreader.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,7 +18,6 @@ import android.widget.Toast;
 
 import com.facebook.widget.FacebookDialog;
 import com.google.android.gms.plus.PlusShare;
-import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,6 +31,9 @@ import ua.ck.geekhub.prozapas.ghprozapasrssreader.databases.RealmHelper;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.helpers.ShareFacebookHelper;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.models.RssItem;
 import ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const;
+
+import static ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const.IMAGELOADER;
+
 
 /**
  * Created by Allteran on 16.11.2014.
@@ -83,12 +83,8 @@ public class DetailsFragment extends BaseFragment {
             } catch (IndexOutOfBoundsException ex) {
                 ex.printStackTrace();
             }
-            try {
-                Picasso.with(getActivity()).load(mRssItem.getImageURL()).into(image);
-            } catch (Exception e) {
-                e.printStackTrace();
-                image.setImageResource(R.mipmap.no_photo);
-            }
+            IMAGELOADER.displayImage(mRssItem.getImageURL(),image);
+
             String contentWithoudImage = mRssItem.getContent().replace(mRssItem.getContent().substring(mRssItem.getContent()
                     .lastIndexOf("<img"), mRssItem.getContent().indexOf("br") + 4), "");
             TextView textViewDescription = (TextView) view.findViewById(R.id.details_description);

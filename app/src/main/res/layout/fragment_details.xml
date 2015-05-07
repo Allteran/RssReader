@@ -40,7 +40,7 @@
             <ImageView
                 android:id="@+id/details_image"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/image_view_height"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/details_title"/>
             <TextView
                 android:id="@+id/details_description"

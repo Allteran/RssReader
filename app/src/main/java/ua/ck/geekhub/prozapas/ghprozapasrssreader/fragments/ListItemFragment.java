@@ -44,13 +44,14 @@ import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 
+import static ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const.Navigation.NEWS;
+import static ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const.Navigation.NEWS_FROM_DB;
 import static ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const.SHARED_PREFERECES_KEY;
 
 /**
  * Created by Allteran on 16.11.2014.
  */
 public class ListItemFragment extends BaseFragment {
-    private final String TAG = this.getClass().getSimpleName();
     private ArrayList<RssItem> mRssItemList = new ArrayList<>();
     private ListView mListView;
     private OnListFragmentEvent mEvent;
@@ -126,7 +127,7 @@ public class ListItemFragment extends BaseFragment {
          * or favorites articles page
          */
         SpinnerAdapter dropDownAdapter = ArrayAdapter
-                .createFromResource(getActivity(), R.array.drop_down_main_menu,
+                .createFromResource(mActivity, R.array.drop_down_main_menu,
                         R.layout.drop_down_line);
         //Callback
         ActionBar.OnNavigationListener callback = new ActionBar.OnNavigationListener() {
@@ -135,14 +136,14 @@ public class ListItemFragment extends BaseFragment {
                 mSpinnerPosition = i;
                 ((ActionBarActivity) getActivity()).supportInvalidateOptionsMenu();
                 switch (i) {
-                    case 0:
+                    case NEWS:
                         if (mDownloadedString == null) {
                             startDownload();
                         } else {
                             updateListItems();
                         }
                         return true;
-                    case 1:
+                    case NEWS_FROM_DB:
                         mRssItemList = mRealmHelper.getAllArticles(mRealm);
                         if (!mRssItemList.isEmpty()) {
                             mArticlesAdapter.notifyDataSetChanged();
@@ -171,7 +172,20 @@ public class ListItemFragment extends BaseFragment {
                 .listener(new OnRefreshListener() {
                     @Override
                     public void onRefreshStarted(View view) {
-                        startDownload();
+                        switch (mSpinnerPosition) {
+                            case NEWS:
+                                startDownload();
+                                break;
+                            case NEWS_FROM_DB:
+                                mRssItemList = mRealmHelper.getAllArticles(mRealm);
+                                if (!mRssItemList.isEmpty()) {
+                                    mArticlesAdapter.notifyDataSetChanged();
+                                    showContent(getView());
+                                } else {
+                                    showNoData(getView(), getString(R.string.no_saved_articles_message));
+                                }
+                                break;
+                        }
                     }
                 })
                 .setup(mSwipeLayout);
@@ -211,10 +225,12 @@ public class ListItemFragment extends BaseFragment {
     //call DownloadRssTask
     public void startDownload() {
         if (isOnline()) {
+            //replace simple calling AsyncTask with DownloadHelper pattern
             new DownloadRssTask().execute(Const.URL);
         } else {
             showNoData(getView(), getResources().getString(R.string.no_connection_message));
         }
+        mSwipeLayout.setRefreshComplete();
     }
 
     public boolean isOnline() {
