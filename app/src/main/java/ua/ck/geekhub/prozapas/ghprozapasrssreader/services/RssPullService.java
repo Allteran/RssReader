@@ -33,7 +33,7 @@ public class RssPullService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i(TAG, "Servis has been started");
+        Log.i(TAG, "Service has been started");
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         mLastArticle = sharedPreferences.getString(Const.SHARED_PREFERECES_KEY, null);
@@ -41,19 +41,19 @@ public class RssPullService extends Service {
         mNotificationManager = (NotificationManager) getApplicationContext().getSystemService(Context
                 .NOTIFICATION_SERVICE);
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext());
-        notificationBuilder
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText(getString(R.string.notification_message));
-
-        Intent serviceIntent = new Intent(getApplicationContext(), MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, serviceIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        notificationBuilder.setContentIntent(pendingIntent);
-
-        Notification notification = notificationBuilder.build();
-        startForeground(Const.NOTIFICATION_ID, notification);
+//        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext());
+//        notificationBuilder
+//                .setSmallIcon(R.drawable.ic_launcher)
+//                .setContentTitle(getString(R.string.app_name))
+//                .setContentText(getString(R.string.notification_message));
+//
+//        Intent serviceIntent = new Intent(getApplicationContext(), MainActivity.class);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, serviceIntent,
+//                PendingIntent.FLAG_UPDATE_CURRENT);
+//        notificationBuilder.setContentIntent(pendingIntent);
+//
+//        Notification notification = notificationBuilder.build();
+//        startForeground(Const.NOTIFICATION_ID, notification);
 
         new Thread(new Runnable() {
             @Override
@@ -68,7 +68,6 @@ public class RssPullService extends Service {
                 }
             }
         }).start();
-
     }
 
     @Override

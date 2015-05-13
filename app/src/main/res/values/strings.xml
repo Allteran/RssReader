@@ -29,7 +29,6 @@
 
     <!--Messages-->
     <string name="no_data_article">We are ready to read, chose an article :)</string>
-    <string name="about_message">Vitaliy Prozapas is an author of this useless application :)</string>
     <string name="before_link_message">Read full version </string>
     <string name="before_date_message">Published date </string>
     <string name="no_connection_message">There is no internet connection :(</string>
@@ -47,5 +46,6 @@
     <string name="clear_all_favorites">Delete all articles</string>
     <string name="clear_all_favorites_message">Are you sure you want to clear favorites?</string>
     <string name="no_saved_articles_message">There are not any saved article</string>
+    <string name="about_message">Application for reading news from Naked-science.ru was made by Vitaliy Prozapas</string>
 
 </resources>

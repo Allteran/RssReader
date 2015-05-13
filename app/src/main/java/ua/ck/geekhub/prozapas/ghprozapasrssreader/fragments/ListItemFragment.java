@@ -151,6 +151,7 @@ public class ListItemFragment extends BaseFragment {
                         } else {
                             showNoData(getView(), getString(R.string.no_saved_articles_message));
                         }
+                        mSwipeLayout.setRefreshComplete();
                         return true;
                 }
                 return true;
@@ -184,6 +185,7 @@ public class ListItemFragment extends BaseFragment {
                                 } else {
                                     showNoData(getView(), getString(R.string.no_saved_articles_message));
                                 }
+                                mSwipeLayout.setRefreshComplete();
                                 break;
                         }
                     }
@@ -229,8 +231,8 @@ public class ListItemFragment extends BaseFragment {
             new DownloadRssTask().execute(Const.URL);
         } else {
             showNoData(getView(), getResources().getString(R.string.no_connection_message));
+            mSwipeLayout.setRefreshComplete();
         }
-        mSwipeLayout.setRefreshComplete();
     }
 
     public boolean isOnline() {

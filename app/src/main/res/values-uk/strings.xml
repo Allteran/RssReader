@@ -21,8 +21,7 @@
     <string name="avatar_description">Зображення аватару користвача</string>
 
     <!--Messages-->
-    <string name="no_data_article">Виберіть статтю</string>
-    <string name="about_message">Автор цїєї непрактичної програми - студент Geekhub Прозапас Віталій</string>
+    <string name="no_data_article">Виберіть статтю і поїхали :)</string>
     <string name="before_link_message">Читати детальніше </string>
     <string name="before_date_message">Опубліковано </string>
     <string name="no_connection_message">Підключення до Інтернет недоступно :(</string>
@@ -36,5 +35,10 @@
     <string name="error_publishing_message">Помилка при публікації статті</string>
     <string name="posted_article_message">Ви успішно поділлись статтею </string>
     <string name="publish_cancelled_message">Публікацію відмінено</string>
+    <string name="clear_all_favorites">Видалити всі збережені статті</string>
+    <string name="clear_all_favorites_message">Ви впевнені, що бажаєте видалити всі збережені статті?</string>
+    <string name="gplus_share">Поділитись цією статтею на Google+</string>
+    <string name="no_saved_articles_message">Список збережених статей пустий</string>
+    <string name="about_message">Додаток було створено для сайту Naked-science.ru Віталієм Прозапасом</string>
 
 </resources>

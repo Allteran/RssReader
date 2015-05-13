@@ -22,7 +22,6 @@
 
     <!--Messages-->
     <string name="no_data_article">Выберите статью и поехали :)</string>
-    <string name="about_message">Автор этого бесполезного приложения - студент Geekhub Прозапас Виталий</string>
     <string name="before_link_message">Читать детальнее </string>
     <string name="before_date_message">Опубликовано </string>
     <string name="no_connection_message">Отсутствует подключение к Интернет :(</string>
@@ -36,5 +35,10 @@
     <string name="error_publishing_message">Ошибка при публикации статьи</string>
     <string name="posted_article_message">Вы успешно поделились статьей </string>
     <string name="publish_cancelled_message">Публикация отменена</string>
+    <string name="clear_all_favorites">Удалить все сохраненные статьи</string>
+    <string name="clear_all_favorites_message">Вы уверены, что хотите удалить все сохраненные статьи?</string>
+    <string name="gplus_share">Поделиться этой статьей на Google+</string>
+    <string name="no_saved_articles_message">Список сохраненных статей пуст</string>
+    <string name="about_message">Данное приложение было создано для сайта Naked-science.ru Виталием Прозапасом</string>
 
 </resources>
