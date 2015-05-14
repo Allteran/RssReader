@@ -2,7 +2,6 @@
 <resources>
 
     <!--Titles-->
-    <string name="app_name">GH Prozapas (RssReader)</string>
     <string name="action_about">Про автора</string>
     <string name="favorites_activity_name">Улюблені статті</string>
     <string name="title_facebook_login">Підключаємось до Facebook</string>
@@ -40,5 +39,8 @@
     <string name="gplus_share">Поділитись цією статтею на Google+</string>
     <string name="no_saved_articles_message">Список збережених статей пустий</string>
     <string name="about_message">Додаток було створено для сайту Naked-science.ru Віталієм Прозапасом</string>
+    <string name="action_about_title">Автор</string>
+    <string name="action_clear_all_fav_title">Видалити збережені статті</string>
+    <string name="no_button">Ні</string>
 
 </resources>

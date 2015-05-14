@@ -2,7 +2,7 @@
 <resources>
 
     <!--Titles-->
-    <string name="app_name">GH Prozapas (RssReader)</string>
+    <string name="app_name" translatable="false">Naked-Science News</string>
     <string name="notification_update_title" translatable="false">Naked-science</string>
     <string name="gplus_activity_label">Sign In Google+</string>
     <string name="title_facebook_login">Connecting to your Facebook</string>
@@ -12,6 +12,8 @@
         <item>News</item>
         <item>Saved Articles</item>
     </array>
+    <string name="action_about_title">About</string>
+    <string name="action_clear_all_fav_title">Clear Favorites</string>
 
 
     <!--Button's labels-->
@@ -22,6 +24,8 @@
     <string name="action_show_favorites">Favorite articles</string>
     <string name="action_add_to_favorites">Add to favorites</string>
     <string name="action_delete_article">Delete saved article</string>
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
 
     <!--Else-->
     <string name="avatar_description">The image of user</string>
@@ -46,6 +50,6 @@
     <string name="clear_all_favorites">Delete all articles</string>
     <string name="clear_all_favorites_message">Are you sure you want to clear favorites?</string>
     <string name="no_saved_articles_message">There are not any saved article</string>
-    <string name="about_message">Application for reading news from Naked-science.ru was made by Vitaliy Prozapas</string>
+    <string name="about_message">Application for reading news from Naked-science.ru was made by Vitalii Prozapas</string>
 
 </resources>

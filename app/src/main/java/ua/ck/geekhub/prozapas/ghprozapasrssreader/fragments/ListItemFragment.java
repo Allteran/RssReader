@@ -261,7 +261,7 @@ public class ListItemFragment extends BaseFragment {
         switch (item.getItemId()) {
             case R.id.action_about:
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("About")
+                        .setTitle(mActivity.getString(R.string.action_about_title))
                         .setMessage(getResources().getString(R.string.about_message))
                         .show();
                 break;
@@ -270,9 +270,9 @@ public class ListItemFragment extends BaseFragment {
                 break;
             case R.id.clear_all_favorites:
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Clear Favorites")
+                        .setTitle(mActivity.getString(R.string.action_clear_all_fav_title))
                         .setMessage(R.string.clear_all_favorites_message)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(mActivity.getString(R.string.yes_button), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 mRealmHelper.deleteAllArticles(mRealm, mActivity, mRssItemList);
@@ -282,7 +282,7 @@ public class ListItemFragment extends BaseFragment {
                                 mActivity.supportInvalidateOptionsMenu();
                             }
                         })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(mActivity.getString(R.string.no_button), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
