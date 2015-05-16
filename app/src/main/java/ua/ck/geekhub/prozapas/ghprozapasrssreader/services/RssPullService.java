@@ -95,6 +95,8 @@ public class RssPullService extends Service {
 
                     Intent updNotificationIntent = new Intent(getApplicationContext(), MainActivity
                             .class);
+                    updNotificationIntent.putExtra(Const.UPD_NOTIFICATION_STRING, mDownloadedString);
+
                     PendingIntent updNotificationPendingIntent = PendingIntent.getActivity(getApplicationContext()
                             , 0, updNotificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -108,6 +110,7 @@ public class RssPullService extends Service {
                     Notification updNotification = notificationBuilder.build();
 
                     startForeground(Const.NOTIFICATION_ID, updNotification);
+
                 }
             }
         }

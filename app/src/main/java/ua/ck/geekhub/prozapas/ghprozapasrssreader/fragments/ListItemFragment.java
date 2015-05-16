@@ -13,12 +13,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -47,11 +49,13 @@ import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 import static ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const.Navigation.NEWS;
 import static ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const.Navigation.NEWS_FROM_DB;
 import static ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const.SHARED_PREFERECES_KEY;
+import static ua.ck.geekhub.prozapas.ghprozapasrssreader.utilities.Const.UPD_NOTIFICATION_STRING;
 
 /**
  * Created by Allteran on 16.11.2014.
  */
 public class ListItemFragment extends BaseFragment {
+    private static final String TAG = ListItemFragment.class.getSimpleName();
     private ArrayList<RssItem> mRssItemList = new ArrayList<>();
     private ListView mListView;
     private OnListFragmentEvent mEvent;
@@ -110,6 +114,11 @@ public class ListItemFragment extends BaseFragment {
         if (mSharedPreferences.getString(SHARED_PREFERECES_KEY, null) != null) {
             mDownloadedString = mSharedPreferences.getString(SHARED_PREFERECES_KEY, null);
         }
+        if (mActivity.getIntent().getStringExtra(UPD_NOTIFICATION_STRING) != null) {
+            mDownloadedString = mActivity.getIntent().getStringExtra(Const.UPD_NOTIFICATION_STRING);
+            Log.i(TAG, String.valueOf(mActivity.getIntent().getStringExtra(UPD_NOTIFICATION_STRING).isEmpty()));
+        }
+
         mArticlesAdapter = new RssAdapter(getActivity());
         mListView = (ListView) view.findViewById(R.id.list_item);
         mListView.setAdapter(mArticlesAdapter);
@@ -191,10 +200,12 @@ public class ListItemFragment extends BaseFragment {
                     }
                 })
                 .setup(mSwipeLayout);
+
         if (savedInstanceState != null) {
             mActions.setSelectedNavigationItem(savedInstanceState.getInt(Const.DB_CHECKER_KEY));
         }
     }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
